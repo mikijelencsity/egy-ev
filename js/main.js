@@ -64,7 +64,7 @@ muteBtn.addEventListener('click', () => {
 // Dupla koppintás bárhol: szív
 let lastTap = { t: 0, x: 0, y: 0 };
 document.addEventListener('pointerup', e => {
-  if (e.target.closest('canvas, button, #cover, .is-stack, .is-holdable, .candle')) return;
+  if (e.target.closest('canvas, button, #cover, .is-stack, .is-holdable')) return;
   const now = performance.now();
   if (now - lastTap.t < 320 && Math.hypot(e.clientX - lastTap.x, e.clientY - lastTap.y) < 40) {
     heart(e.clientX, e.clientY);

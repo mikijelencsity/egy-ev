@@ -1,6 +1,7 @@
 // ============================================================
 //  Az oldal teljes tartalma. Szöveget, képet, sorrendet itt írj át.
 //  (Hosszú gondolatjelet ne használj, a teszt jelez rá.)
+//  Az alcím és a képaláírás elhagyható (üres szöveg).
 // ============================================================
 
 export const START_DATE = new Date(2025, 8, 14, 0, 0, 0); // 2025. szeptember 14.
@@ -39,24 +40,24 @@ export const chapters = [
     title: 'Randik',
     subtitle: 'vacsorák és esték',
     photos: [
-      { src: img('IMG_4422.jpg'), caption: 'étteremben', rot: 3 },
-      { src: img('att.jpg'), caption: 'este a téren', rot: -4, wide: true },
-      { src: img('IMG_5685.jpg'), caption: 'vacsora', rot: 2 },
+      { src: img('IMG_4422.jpg'), caption: 'volt hogy nem ízlett..', rot: 3 },
+      { src: img('att.jpg'), caption: '', rot: -4, wide: true },
+      { src: img('IMG_5685.jpg'), caption: 'harleys sapkában', rot: 2 },
     ],
     interaction: null,
   },
   {
     id: 'halloween',
     title: 'Halloween',
-    subtitle: 'zárolt emlék',
+    subtitle: '',
     photos: [
       { src: img('IMG_3631.jpg'), caption: 'Joker és Harley', rot: -2 },
     ],
-    interaction: { type: 'quiz' },
+    interaction: null,
   },
   {
-    id: 'wellness',
-    title: 'Wellness',
+    id: 'gyula',
+    title: 'Gyulán',
     subtitle: 'kikapcsolódás',
     photos: [
       { src: img('IMG_4079.jpg'), caption: 'a medence', rot: -3 },
@@ -79,7 +80,7 @@ export const chapters = [
     title: 'Meglepetés',
     subtitle: 'egy este',
     photos: [
-      { src: img('IMG_4133.jpg'), caption: 'lufi és ajándékok', rot: 2 },
+      { src: img('IMG_4133.jpg'), caption: 'karácsony', rot: 2 },
     ],
     interaction: { type: 'scratch', photo: 0, hint: 'kapard le' },
   },
@@ -105,13 +106,6 @@ export const chapters = [
     interaction: null,
   },
 ];
-
-export const quiz = {
-  question: 'Minek öltöztünk Halloweenkor?',
-  options: ['Batman és Macskanő', 'Joker és Harley Quinn', 'Vámpírok'],
-  correct: 1,
-  hint: 'zöld haj, piros rúzs',
-};
 
 // Amíg placeholder: true, a levél nem jelenik meg az oldalon.
 export const letter = {

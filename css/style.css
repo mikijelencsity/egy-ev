@@ -5,7 +5,6 @@
   --ink:#3b2f26;
   --ink-soft:#7a6655;
   --accent:#b5452b;
-  --accent-dark:#7d2f1c;
   --tape:rgba(222,200,150,.82);
   --sunset:#f1cfb4;
 }
@@ -99,7 +98,6 @@ button{font:inherit;color:inherit}
 .scene{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px}
 .counter-pre,.counter-post{font-size:36px;color:var(--ink)}
 .counter-num{font-size:clamp(110px,36vw,150px);line-height:1;font-weight:700;color:var(--accent);margin:4px 0}
-.counter-clock{margin-top:14px;font-size:13px;letter-spacing:.08em;color:var(--ink-soft);font-variant-numeric:tabular-nums}
 .scroll-cue{margin-top:60px;font-size:24px;color:var(--ink-soft);animation:bob 2s ease-in-out infinite}
 
 /* ============ Fejezetek ============ */
@@ -159,22 +157,6 @@ button{font:inherit;color:inherit}
 .paws{position:absolute;inset:0;pointer-events:none;z-index:6}
 .paws span{position:absolute;font-size:30px;transform:rotate(140deg)}
 
-.polaroid.locked img{filter:blur(16px) sepia(.3)}
-.polaroid.unlocked img{transition:filter 1.6s ease}
-.lock{position:absolute;inset:0;z-index:3;display:flex;align-items:center;justify-content:center;font-size:66px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.35))}
-.quiz{
-  width:90%;align-self:center;margin-top:-10px;padding:16px 16px 12px;border-radius:10px;
-  background:var(--paper-light);border:2px dashed var(--accent);transform:rotate(-1deg);
-}
-.quiz-q{font-size:28px;line-height:1.1;text-align:center;margin-bottom:8px}
-.quiz-opt{
-  display:block;width:100%;margin-top:9px;padding:8px 10px;font-size:25px;cursor:pointer;
-  background:transparent;border:1.5px solid rgba(59,47,38,.35);border-radius:8px;transition:background .3s,color .3s,opacity .3s;
-}
-.quiz-opt.wrong{opacity:.4;text-decoration:line-through}
-.quiz-opt.ok{background:var(--accent);border-color:var(--accent);color:var(--paper-light)}
-.quiz.done .quiz-opt:not(.ok){opacity:.3}
-.quiz-hint{min-height:28px;text-align:center;font-size:22px;color:var(--accent);margin-top:8px}
 
 /* ============ Finálé ============ */
 #finale{padding:90px 16px 40px}
@@ -188,39 +170,11 @@ button{font:inherit;color:inherit}
 .letter p{font-size:27px;line-height:34px;margin-bottom:34px}
 .letter .signature{font-size:36px;color:var(--accent);text-align:right;margin:0}
 
-.candle-wrap{text-align:center;margin-top:90px}
-.candle-title{font-size:40px;color:var(--ink)}
-.candle{position:relative;width:64px;height:210px;margin:30px auto 26px;cursor:pointer}
-.wax{position:absolute;bottom:0;left:0;width:64px;height:150px;border-radius:9px 9px 4px 4px;background:linear-gradient(90deg,#eadcc4,#fffaf0 40%,#dccaae);box-shadow:0 10px 20px rgba(60,40,20,.2)}
-.wick{position:absolute;bottom:150px;left:31px;width:2px;height:14px;background:var(--ink)}
-.flame-wrap{position:absolute;bottom:160px;left:19px;width:26px;height:46px;transform-origin:50% 100%;transition:transform .08s}
-.flame{
-  width:100%;height:100%;border-radius:50% 50% 50% 50% / 62% 62% 38% 38%;transform-origin:50% 90%;
-  background:radial-gradient(ellipse at 50% 72%, #fff7cf 0%, #ffd66e 32%, #ff9d3d 62%, rgba(255,120,40,0) 74%);
-  filter:drop-shadow(0 0 14px rgba(255,170,60,.85));
-  animation:flicker .16s ease-in-out infinite alternate;
-  transition:opacity .35s, transform .35s;
-}
-@keyframes flicker{from{transform:scaleY(1) rotate(-2deg)}to{transform:scaleY(1.08) rotate(2deg)}}
-.flame.out{animation:none;opacity:0;transform:scale(.1)}
-.glow{position:absolute;left:50%;bottom:120px;width:180px;height:180px;margin-left:-90px;border-radius:50%;background:radial-gradient(circle, rgba(255,190,90,.35), transparent 65%);transition:opacity .6s;pointer-events:none}
-.candle.is-out .glow{opacity:0}
-.smoke{position:absolute;left:24px;bottom:160px;width:16px;height:16px;border-radius:50%;background:rgba(120,110,100,.45);filter:blur(4px);pointer-events:none}
-.btn-hand{
-  font-size:28px;padding:8px 26px;border:none;border-radius:40px;cursor:pointer;
-  background:var(--accent);color:var(--paper-light);box-shadow:0 4px 0 var(--accent-dark);
-}
-.btn-hand:active{transform:translateY(3px);box-shadow:0 1px 0 var(--accent-dark)}
-.btn-hand.hide{display:none}
-.candle-help{min-height:32px;font-size:25px;color:var(--ink-soft);margin-top:14px}
-
-.the-end{min-height:70svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;visibility:hidden;opacity:0}
-.the-end.show{visibility:visible;opacity:1}
+.the-end{min-height:70svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
 .the-end p{font-size:clamp(34px,11vw,50px);color:var(--accent);padding:0 16px}
 .the-end small{margin-top:10px;font-size:12px;letter-spacing:.2em;color:var(--ink-soft)}
 
 /* ============ Mozgáscsökkentés ============ */
 @media (prefers-reduced-motion: reduce){
   .grain,.book-cover,.cover-hint,.scroll-cue,.loader-heart{animation:none}
-  .flame{animation:none}
 }

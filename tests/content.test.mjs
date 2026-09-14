@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readdirSync } from 'node:fs';
-import { START_DATE, chapters, quiz, letter } from '../js/content.js';
+import { START_DATE, chapters, letter } from '../js/content.js';
 
 const files = readdirSync(new URL('../images/web/', import.meta.url));
 const refs = chapters
@@ -18,17 +18,12 @@ test('minden kép pontosan egyszer szerepel', () => {
 });
 
 test('interakció-típusok', () => {
-  const ok = new Set([null, 'spread', 'hold', 'quiz', 'fog', 'scatter', 'scratch']);
+  const ok = new Set([null, 'spread', 'hold', 'fog', 'scatter', 'scratch']);
   for (const c of chapters) assert.ok(ok.has(c.interaction?.type ?? null), c.id);
 });
 
 test('egyedi fejezet-azonosítók', () => {
   assert.equal(new Set(chapters.map(c => c.id)).size, chapters.length);
-});
-
-test('kvíz érvényes', () => {
-  assert.ok(quiz.options.length >= 2);
-  assert.ok(quiz.correct >= 0 && quiz.correct < quiz.options.length);
 });
 
 test('kezdődátum 2025-09-14 00:00', () => {
@@ -44,6 +39,6 @@ test('levél szerkezete', () => {
 });
 
 test('nincs em-dash a szövegekben', () => {
-  const text = JSON.stringify({ chapters, quiz, letter });
+  const text = JSON.stringify({ chapters, letter });
   assert.ok(!text.includes('—'), 'em-dash található');
 });

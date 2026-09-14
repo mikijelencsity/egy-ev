@@ -19,7 +19,7 @@ export function renderChapters(root, chapters) {
         <span class="ch-num">${i + 1}. fejezet</span>
         <h2 class="ch-title hand">${esc(ch.title)}</h2>
         <svg class="ch-underline" viewBox="0 0 300 24" aria-hidden="true"><path d="M6 14 C 60 4, 120 22, 180 11 S 272 6, 294 14"/></svg>
-        <p class="ch-sub hand">${esc(ch.subtitle)}</p>
+        ${ch.subtitle ? `<p class="ch-sub hand">${esc(ch.subtitle)}</p>` : ''}
       </header>
       <div class="ch-body" data-interaction="${ch.interaction?.type ?? ''}">
         ${ch.photos.map(polaroid).join('')}
@@ -30,7 +30,7 @@ export function renderChapters(root, chapters) {
   });
 }
 
-const MANAGED = new Set(['spread', 'scatter', 'quiz']);
+const MANAGED = new Set(['spread', 'scatter']);
 
 // Görgetésre induló jelenetek.
 export function animateChapters(sections, chapters, { sound, reduce }) {
@@ -53,11 +53,12 @@ export function animateChapters(sections, chapters, { sound, reduce }) {
     const path = head.querySelector('.ch-underline path');
     const len = path.getTotalLength();
     gsap.set(path, { strokeDasharray: len, strokeDashoffset: len });
-    gsap.timeline({ scrollTrigger: { trigger: head, start: 'top 82%', once: true } })
+    const headTl = gsap.timeline({ scrollTrigger: { trigger: head, start: 'top 82%', once: true } })
       .from(head.querySelector('.ch-num'), { opacity: 0, y: 10, duration: 0.4 })
       .from(head.querySelector('.ch-title'), { opacity: 0, y: 28, rotation: -4, duration: 0.7, ease: 'back.out(1.6)' }, '-=0.15')
-      .to(path, { strokeDashoffset: 0, duration: 0.8, ease: 'power2.inOut' }, '-=0.35')
-      .from(head.querySelector('.ch-sub'), { opacity: 0, duration: 0.5 }, '-=0.3');
+      .to(path, { strokeDashoffset: 0, duration: 0.8, ease: 'power2.inOut' }, '-=0.35');
+    const sub = head.querySelector('.ch-sub');
+    if (sub) headTl.from(sub, { opacity: 0, duration: 0.5 }, '-=0.3');
 
     if (MANAGED.has(body.dataset.interaction)) {
       gsap.from(body, {

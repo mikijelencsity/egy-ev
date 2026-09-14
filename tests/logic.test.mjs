@@ -1,7 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { elapsed } from '../js/lib/time.js';
-import { checkAnswer } from '../js/lib/quiz.js';
 import { erasedRatio } from '../js/lib/erase.js';
 
 test('elapsed: pontosan egy év = 365 nap', () => {
@@ -19,13 +18,6 @@ test('elapsed: órák, percek, másodpercek', () => {
 test('elapsed: jövőbeli kezdetnél nulla', () => {
   const s = new Date(2030, 0, 1);
   assert.deepEqual(elapsed(s, new Date(2026, 0, 1)), { days: 0, hours: 0, minutes: 0, seconds: 0 });
-});
-
-test('checkAnswer', () => {
-  const q = { options: ['a', 'b', 'c'], correct: 1 };
-  assert.equal(checkAnswer(q, 1), true);
-  assert.equal(checkAnswer(q, 0), false);
-  assert.equal(checkAnswer(q, 9), false);
 });
 
 test('erasedRatio: alfa-csatorna alapján', () => {
