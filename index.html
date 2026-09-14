@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>1 Év — A Mi Történetünk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #12162b;
+    --navy-deep: #0b0e1d;
+    --gold: #e8b04b;
+    --gold-soft: #f0dcc8;
+    --line: rgba(232,176,75,0.28);
+    --text-dim: rgba(240,220,200,0.55);
+  }
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  html{ -webkit-text-size-adjust:100%; }
+  body{
+    background: radial-gradient(ellipse at top, #1a2040 0%, var(--navy-deep) 65%);
+    color: var(--gold-soft);
+    font-family:'Inter', sans-serif;
+    overflow-x:hidden;
+    width:100%;
+    min-height:100vh;
+    position:relative;
+    -webkit-font-smoothing:antialiased;
+    animation: aurora-shift 22s ease-in-out infinite alternate;
+  }
+  @keyframes aurora-shift{
+    0%{ background-position: 50% 0%; }
+    100%{ background-position: 50% 8%; }
+  }
+
+  /* ================= PRELOADER ================= */
+  #preloader{
+    position:fixed; inset:0; z-index:200;
+    background: var(--navy-deep);
+    display:flex; align-items:center; justify-content:center;
+    transition: opacity 0.6s ease, visibility 0.6s;
+  }
+  #preloader.hide{ opacity:0; visibility:hidden; }
+  .preloader-inner{ text-align:center; }
+  .ring{ width:96px; height:96px; transform:rotate(-90deg); }
+  .ring-bg{ fill:none; stroke:rgba(232,176,75,0.15); stroke-width:3; }
+  .ring-fg{
+    fill:none; stroke:var(--gold); stroke-width:3; stroke-linecap:round;
+    stroke-dasharray:326.7; stroke-dashoffset:326.7;
+    transition: stroke-dashoffset 0.25s ease;
+    filter: drop-shadow(0 0 6px rgba(232,176,75,0.6));
+  }
+  .preloader-pct{
+    font-family:'Cormorant Garamond', serif; font-size:1.3rem; color:var(--gold);
+    margin-top:14px;
+  }
+  .preloader-label{
+    font-size:0.72rem; letter-spacing:0.1em; color:var(--text-dim);
+    margin-top:8px; height:16px;
+    text-transform:uppercase;
+  }
+
+  /* ================= Starfield ================= */
+  #stars{ position:fixed; inset:0; z-index:0; pointer-events:none; }
+  .star{
+    position:absolute; background:#fff; border-radius:50%;
+    opacity:0.5; animation: twinkle 4s ease-in-out infinite;
+  }
+  @keyframes twinkle{ 0%,100%{opacity:0.15;} 50%{opacity:0.9;} }
+
+  .secret-star{
+    position:fixed; width:5px; height:5px;
+    background: var(--gold); border-radius:50%;
+    box-shadow: 0 0 8px 2px rgba(232,176,75,0.8);
+    z-index:5; pointer-events:auto; cursor:pointer;
+    animation: secret-pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes secret-pulse{
+    0%,100%{ transform:scale(1); box-shadow:0 0 8px 2px rgba(232,176,75,0.6); }
+    50%{ transform:scale(1.8); box-shadow:0 0 16px 6px rgba(232,176,75,0.9); }
+  }
+
+  .shooting-star{
+    position:fixed; top:0; left:-10%;
+    width:2px; height:2px; background:#fff; border-radius:50%;
+    box-shadow: 0 0 6px 1px #fff;
+    z-index:3; pointer-events:none;
+  }
+  .shooting-star::before{
+    content:''; position:absolute; top:0; right:0;
+    width:70px; height:1px;
+    background:linear-gradient(to left, #fff, transparent);
+    transform-origin: right center;
+  }
+  @keyframes shoot{
+    0%{ transform: translate(0,0) rotate(35deg); opacity:0; }
+    8%{ opacity:1; }
+    90%{ opacity:0.8; }
+    100%{ transform: translate(120vw, 90vh) rotate(35deg); opacity:0; }
+  }
+
+  /* ================= Top chrome ================= */
+  #progress-bar{
+    position:fixed; top:0; left:0; right:0; z-index:20;
+    display:flex; align-items:center; justify-content:center;
+    padding:10px 12px; font-size:0.65rem; letter-spacing:0.08em;
+    color: var(--text-dim);
+    background: linear-gradient(to bottom, rgba(11,14,29,0.85), transparent);
+    pointer-events:none;
+  }
+  #progress-bar span{ color: var(--gold); margin-left:4px; }
+
+  #sound-toggle{
+    position:fixed; top:8px; right:10px; z-index:21;
+    width:34px; height:34px; border-radius:50%;
+    background: rgba(18,22,43,0.6); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    font-size:0.95rem; cursor:pointer; color:var(--gold-soft);
+    backdrop-filter: blur(3px);
+  }
+
+  /* ================= Sparkle trail ================= */
+  .sparkle-dot{
+    position:fixed; z-index:40; pointer-events:none;
+    font-size:0.8rem; color:var(--gold);
+    animation: sparkle-fade 0.7s ease-out forwards;
+  }
+  @keyframes sparkle-fade{
+    0%{ opacity:0.9; transform:translate(-50%,-50%) scale(1); }
+    100%{ opacity:0; transform:translate(-50%,-50%) scale(0.3) translateY(-14px); }
+  }
+
+  /* ================= Hero ================= */
+  .hero{
+    position:relative; z-index:1;
+    min-height:100svh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:40px 20px;
+  }
+  .hero .eyebrow{
+    font-size:0.68rem; letter-spacing:0.14em; color:var(--text-dim);
+    margin-bottom:16px; font-weight:400;
+  }
+  .hero h1{
+    font-family:'Cormorant Garamond', serif; font-weight:600;
+    font-size:clamp(3.2rem, 18vw, 5.5rem); line-height:0.95;
+    color:var(--gold); text-shadow: 0 0 40px rgba(232,176,75,0.25);
+    user-select:none; cursor:pointer;
+  }
+  .hero .names{
+    font-family:'Cormorant Garamond', serif; font-style:italic;
+    font-size:clamp(1.2rem, 6vw, 1.7rem); margin-top:14px; color:var(--gold-soft);
+  }
+  .hero .subtitle{
+    margin-top:24px; max-width:320px; font-size:0.9rem; line-height:1.65; color:var(--text-dim);
+  }
+  .scroll-cue{
+    margin-top:48px; display:flex; flex-direction:column; align-items:center; gap:10px;
+    color:var(--text-dim); font-size:0.7rem; letter-spacing:0.1em;
+  }
+  .scroll-cue .arrow{
+    width:1px; height:32px; background:linear-gradient(to bottom, var(--gold), transparent);
+    animation: pulse-down 2s ease-in-out infinite;
+  }
+  @keyframes pulse-down{
+    0%,100%{opacity:0.3; transform:scaleY(1);} 50%{opacity:1; transform:scaleY(1.15);}
+  }
+
+  .wish-toast{
+    position:fixed; top:14%; left:50%; transform:translateX(-50%);
+    z-index:65; padding:10px 18px; border-radius:20px;
+    background:rgba(18,22,43,0.85); border:1px solid var(--gold);
+    color:var(--gold); font-size:0.85rem; letter-spacing:0.03em;
+    opacity:0; pointer-events:none;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .wish-toast.show{ opacity:1; transform:translateX(-50%) translateY(6px); }
+
+  /* ================= Timeline ================= */
+  .timeline-wrap{
+    position:relative; z-index:1; max-width:480px; margin:0 auto;
+    padding: 40px 20px 100px;
+  }
+  .timeline-line, .timeline-line-fill{
+    position:absolute; left:39px; top:0; width:1px;
+  }
+  .timeline-line{
+    bottom:0;
+    background:linear-gradient(to bottom, transparent, var(--line) 6%, var(--line) 94%, transparent);
+  }
+  .timeline-line-fill{
+    height:0%;
+    background: linear-gradient(to bottom, var(--gold), rgba(232,176,75,0.2));
+    box-shadow: 0 0 6px rgba(232,176,75,0.6);
+    transition: height 0.15s linear;
+  }
+  .stop{ position:relative; margin-bottom:22px; }
+  .stop-head{ display:flex; align-items:center; gap:16px; cursor:pointer; padding:6px 0; }
+  .capsule{
+    position:relative; flex:none; width:60px; height:60px; border-radius:50%;
+    background: radial-gradient(circle at 35% 30%, #2a2f52, var(--navy) 70%);
+    border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; z-index:2;
+    transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease;
+    overflow:hidden;
+  }
+  .capsule::after{
+    content:''; position:absolute; inset:0; border-radius:50%;
+    background:linear-gradient(120deg, transparent 40%, rgba(255,255,255,0.35) 50%, transparent 60%);
+    transform:translateX(-120%);
+  }
+  .capsule.opened::after{ animation: shimmer-sweep 0.7s ease; }
+  @keyframes shimmer-sweep{ to{ transform:translateX(120%); } }
+  .capsule .num{ font-family:'Cormorant Garamond', serif; font-size:1.35rem; color:var(--gold); opacity:0.85; }
+  .capsule.opened{
+    background: radial-gradient(circle at 35% 30%, var(--gold), #c98f2e 70%);
+    box-shadow: 0 0 28px rgba(232,176,75,0.5); border-color: var(--gold);
+    transform: scale(1.04);
+  }
+  .capsule.opened .num{ color: var(--navy-deep); opacity:1; }
+  .capsule.checked::before{
+    content:'✓'; position:absolute; bottom:-4px; right:-4px;
+    width:18px; height:18px; border-radius:50%;
+    background: var(--navy-deep); border:1px solid var(--gold);
+    color:var(--gold); font-size:0.6rem;
+    display:flex; align-items:center; justify-content:center; z-index:3;
+  }
+  .stop-label{ font-size:0.78rem; letter-spacing:0.06em; color:var(--text-dim); text-transform:uppercase; }
+  .stop-label .tap-hint{
+    display:block; font-size:0.68rem; color:rgba(240,220,200,0.3); margin-top:2px;
+    text-transform:none; letter-spacing:0.02em;
+  }
+
+  .reveal-card{
+    margin-left:76px; margin-top:0; max-height:0; opacity:0; overflow:hidden;
+    transition: max-height 0.5s ease, opacity 0.5s ease, margin-top 0.5s ease;
+  }
+  .reveal-card.show{ max-height:640px; opacity:1; margin-top:14px; }
+  .reveal-card-inner{
+    background: linear-gradient(160deg, #1b2140, #12162b 60%);
+    border:1px solid var(--line); border-radius:6px; padding:12px 12px 16px;
+    box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+  }
+  .reveal-card img{ width:100%; display:block; border-radius:3px; filter: saturate(0.95); }
+  .reveal-card .title{
+    font-family:'Cormorant Garamond', serif; font-size:1.25rem; font-weight:600;
+    color:var(--gold); margin-top:12px;
+  }
+  .reveal-card .text{ font-size:0.85rem; line-height:1.55; color:var(--gold-soft); margin-top:6px; font-weight:300; }
+
+  /* ================= Finale ================= */
+  .finale{
+    position:relative; z-index:1; min-height:100svh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:60px 24px;
+    background: linear-gradient(to top, #1c1430 0%, transparent 100%);
+  }
+  .finale-capsule{
+    width:100px; height:100px; border-radius:50%;
+    background: radial-gradient(circle at 35% 30%, #2a2f52, var(--navy) 70%);
+    border:1px solid var(--gold);
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    box-shadow: 0 0 40px rgba(232,176,75,0.15);
+    transition: all 0.5s ease; margin-bottom:28px;
+  }
+  .finale-capsule span{ font-family:'Cormorant Garamond', serif; font-style:italic; font-size:1rem; color:var(--gold); }
+  .finale-capsule.opened{
+    background: radial-gradient(circle at 35% 30%, var(--gold), #c98f2e 70%);
+    box-shadow: 0 0 60px rgba(232,176,75,0.6);
+  }
+  .finale-capsule.ready{ animation: ready-glow 1.6s ease-in-out infinite; }
+  @keyframes ready-glow{
+    0%,100%{ box-shadow: 0 0 30px rgba(232,176,75,0.3); }
+    50%{ box-shadow: 0 0 55px rgba(232,176,75,0.7); }
+  }
+  .finale-message{ max-width:400px; opacity:0; max-height:0; overflow:hidden; transition: opacity 0.8s ease, max-height 1s ease; }
+  .finale-message.show{ opacity:1; max-height:800px; margin-top:6px;}
+  .finale-message h2{
+    font-family:'Cormorant Garamond', serif; font-size:clamp(1.7rem, 7vw, 2.2rem);
+    color:var(--gold); margin-bottom:18px; font-weight:600;
+  }
+  .finale-message p{ font-size:0.92rem; line-height:1.75; color:var(--gold-soft); font-weight:300; margin-bottom:14px; }
+  .finale-message .signature{
+    margin-top:22px; font-family:'Cormorant Garamond', serif; font-style:italic; font-size:1.25rem; color:var(--gold);
+  }
+  .bonus-line{
+    margin-top:20px; padding-top:16px; border-top:1px dashed var(--line);
+    font-size:0.85rem; line-height:1.6; color: var(--gold); font-style:italic;
+    max-height:0; opacity:0; overflow:hidden;
+    transition: max-height 0.8s ease, opacity 0.8s ease;
+  }
+  .bonus-line.show{ max-height:200px; opacity:1; }
+  .finale-heart{ margin-top:36px; font-size:0.68rem; letter-spacing:0.12em; color: rgba(240,220,200,0.3); }
+
+  /* ================= Overlays ================= */
+  #heart-burst-layer, #confetti-layer{ position:fixed; inset:0; pointer-events:none; z-index:50; overflow:hidden; }
+  .flying-heart{ position:absolute; font-size:1.4rem; animation: float-up 2.6s ease-in forwards; opacity:0.9; }
+  @keyframes float-up{
+    0%{ transform:translateY(0) scale(0.6) rotate(0deg); opacity:0; }
+    10%{ opacity:1; }
+    100%{ transform:translateY(-70vh) scale(1.1) rotate(20deg); opacity:0; }
+  }
+  .tap-heart{
+    position:fixed; font-size:2.4rem; pointer-events:none; z-index:60;
+    animation: tap-pop 0.9s ease-out forwards;
+  }
+  @keyframes tap-pop{
+    0%{ transform:translate(-50%,-50%) scale(0.3); opacity:0; }
+    30%{ transform:translate(-50%,-50%) scale(1.2); opacity:1; }
+    100%{ transform:translate(-50%,-70%) scale(1); opacity:0; }
+  }
+  .confetti-piece{ position:absolute; top:-20px; width:8px; height:14px; animation: confetti-fall 3.2s linear forwards; }
+  @keyframes confetti-fall{
+    0%{ transform:translateY(0) rotate(0deg); opacity:1; }
+    100%{ transform:translateY(110vh) rotate(540deg); opacity:0.4; }
+  }
+  .paw-print{ position:fixed; font-size:1.3rem; z-index:55; pointer-events:none; animation: paw-walk 1.8s ease-out forwards; }
+  @keyframes paw-walk{
+    0%{ opacity:0; transform:scale(0.5); }
+    15%{ opacity:0.9; transform:scale(1); }
+    85%{ opacity:0.7; }
+    100%{ opacity:0; transform:scale(0.9); }
+  }
+
+  #secret-modal{
+    position:fixed; inset:0; z-index:70; background: rgba(11,14,29,0.92);
+    display:none; align-items:center; justify-content:center; padding:32px;
+    backdrop-filter: blur(4px);
+  }
+  #secret-modal.show{ display:flex; }
+  .secret-modal-box{
+    max-width:320px; text-align:center; border:1px solid var(--gold); border-radius:6px;
+    padding:28px 22px; background: linear-gradient(160deg, #1b2140, #12162b 60%);
+  }
+  .secret-modal-box .icon{ font-size:1.8rem; margin-bottom:14px; }
+  .secret-modal-box h3{ font-family:'Cormorant Garamond', serif; color:var(--gold); font-size:1.4rem; margin-bottom:12px; }
+  .secret-modal-box p{ font-size:0.85rem; line-height:1.6; color:var(--gold-soft); font-weight:300; }
+  .secret-modal-box .close-btn{
+    margin-top:18px; font-size:0.72rem; letter-spacing:0.08em; color:var(--text-dim);
+    cursor:pointer; text-decoration:underline;
+  }
+</style>
+</head>
+<body>
+
+<div id="preloader">
+  <div class="preloader-inner">
+    <svg class="ring" viewBox="0 0 120 120">
+      <circle class="ring-bg" cx="60" cy="60" r="52"/>
+      <circle class="ring-fg" id="ring-fg" cx="60" cy="60" r="52"/>
+    </svg>
+    <div class="preloader-pct" id="preloader-pct">0%</div>
+    <div class="preloader-label" id="preloader-label">Csillagok gyújtása...</div>
+  </div>
+</div>
+
+<div id="stars"></div>
+<div id="progress-bar">EMLÉK FELFEDEZVE <span id="progress-count">0 / 11</span></div>
+<div id="sound-toggle">🔈</div>
+<div class="wish-toast" id="wish-toast">Kívánj valamit... 🌠</div>
+<div id="heart-burst-layer"></div>
+<div id="confetti-layer"></div>
+
+<div id="secret-modal">
+  <div class="secret-modal-box">
+    <div class="icon">✨</div>
+    <h3><!-- CÍM -->Titkos üzenet</h3>
+    <p>
+      <!-- CSERÉLD KI -->
+      Ha ezt olvasod, tényleg minden csillagot végignéztél.
+      Pontosan így figyelek rád én is — apró részletekben.
+    </p>
+    <div class="close-btn" onclick="document.getElementById('secret-modal').classList.remove('show')">bezárás</div>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="eyebrow">EGY ÉVE KEZDŐDÖTT</div>
+  <h1 id="hero-title">1 ÉV</h1>
+  <div class="names"><!-- CSERÉLD KI -->Jazmin &amp; Miki</div>
+  <p class="subtitle">
+    <!-- CSERÉLD KI -->
+    Ez itt egy kis időkapszula — koppints végig az emlékeken,
+    az elsőtől egészen a mai napig. (Van pár rejtett meglepetés is... 👀)
+  </p>
+  <div class="scroll-cue">
+    <span>GÖRGESS LEFELÉ</span>
+    <div class="arrow"></div>
+  </div>
+</section>
+
+<section class="timeline-wrap" id="timeline-wrap">
+  <div class="timeline-line"></div>
+  <div class="timeline-line-fill" id="timeline-fill"></div>
+
+  <div class="stop">
+    <div class="stop-head" data-target="card-1">
+      <div class="capsule" id="cap-1"><span class="num">1</span></div>
+      <div class="stop-label">Kezdet<span class="tap-hint">koppints ide</span></div>
+    </div>
+    <div class="reveal-card" id="card-1">
+      <div class="reveal-card-inner">
+        <img src="images/web/IMG_0125.jpg" alt="">
+        <div class="title"><!-- CÍM -->Az első közös képünk</div>
+        <div class="text"><!-- SZÖVEG -->Ide írd, hogyan kezdődött — az első pillanat, az első este, amire visszagondolva mindketten mosolyogtok.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="stop-head" data-target="card-2">
+      <div class="capsule" id="cap-2"><span class="num">2</span></div>
+      <div class="stop-label">Korai napok</div>
+    </div>
+    <div class="reveal-card" id="card-2">
+      <div class="reveal-card-inner">
+        <img src="images/web/IMG_6461.jpg" alt="">
+        <div class="title">Esti csendek</div>
+        <div class="text">Egy apró, hétköznapi pillanat, ami mégis emlékezetes maradt.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="stop-head" data-target="card-3">
+      <div class="capsule" id="cap-3"><span class="num">3</span></div>
+      <div class="stop-label">Egy új tag<span class="tap-hint">tartsd lenyomva 🐾</span></div>
+    </div>
+    <div class="reveal-card" id="card-3">
+      <div class="reveal-card-inner">
+        <img src="images/web/IMG_7680.jpg" alt="">
+        <div class="title">Mr. Cica csatlakozik</div>
+        <div class="text">A kis szőrös társ, aki azóta is mindenhol ott van, ahol mi.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="stop-head" data-target="card-4">
+      <div class="capsule" id="cap-4"><span class="num">4</span></div>
+      <div class="stop-label">Randi este</div>
+    </div>
+    <div class="reveal-card" id="card-4">
+      <div class="reveal-card-inner">
+        <img src="images/web/3C30B8D2-BB94-44AE-9905-C7D29B850743.jpg" alt="">
+        <div class="title">Egy éjszakai vacsora</div>
+        <div class="text">A fények, a tenger illata, és egy csók, amit nem felejtünk.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="stop-head" data-target="card-5">
+      <div class="capsule" id="cap-5"><span class="num">5</span></div>
+      <div class="stop-label">Hétköznapok</div>
+    </div>
+    <div class="reveal-card" id="card-5">
+      <div class="reveal-card-inner">
+        <img src="images/web/IMG_4043.jpg" alt="">
+        <div class="title">A legjobb pillanatok a legegyszerűbbek</div>
+        <div class="text">Egy bevásárlás, egy nevetés, egy pillantás a tükörben.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="stop-head" data-target="card-6">
+      <div class="capsule" id="cap-6"><span class="num">6</span></div>
+      <div class="stop-label">Halloween</div>
+    </div>
+    <div class="reveal-card" id="card-6">
+      <div class="reveal-card-inner">
+        <img src="images/web/IMG_3279.jpg" alt="">
+        <div class="title">Joker &amp; Harley este</div>
+        <div class="text">Amikor jelmezbe bújtunk, és az egész este egy nagy nevetés volt.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="stop-head" data-target="card-7">
+      <div class="capsule" id="cap-7"><span class="num">7</span></div>
+      <div class="stop-label">Wellness hétvége</div>
+    </div>
+    <div class="reveal-card" id="card-7">
+      <div class="reveal-card-inner">
+        <img src="images/web/IMG_5685.jpg" alt="">
+        <div class="title">Egy kis kikapcsolódás</div>
+        <div class="text">Egy hétvége, csak kettőnknek, távol mindentől.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="stop-head" data-target="card-8">
+      <div class="capsule" id="cap-8"><span class="num">8</span></div>
+      <div class="stop-label">Meglepetés</div>
+    </div>
+    <div class="reveal-card" id="card-8">
+      <div class="reveal-card-inner">
+        <img src="images/web/IMG_2831.jpg" alt="">
+        <div class="title">Minden pillanatot szeretek veled</div>
+        <div class="text">Egy apró meglepetés-este, ami sokat elmond arról, hogy figyelünk egymásra.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="stop-head" data-target="card-9">
+      <div class="capsule" id="cap-9"><span class="num">9</span></div>
+      <div class="stop-label">Nyár</div>
+    </div>
+    <div class="reveal-card" id="card-9">
+      <div class="reveal-card-inner">
+        <img src="images/web/IMG_3631.jpg" alt="">
+        <div class="title">A tengerparton</div>
+        <div class="text">Naplemente, só íze a levegőben, és egy ölelés, ami megállította az időt.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="stop-head" data-target="card-10">
+      <div class="capsule" id="cap-10"><span class="num">10</span></div>
+      <div class="stop-label">Városnézés</div>
+    </div>
+    <div class="reveal-card" id="card-10">
+      <div class="reveal-card-inner">
+        <img src="images/web/att.jpg" alt="">
+        <div class="title">Óriáskerék, magasan a város felett</div>
+        <div class="text">Egy este, amikor felültünk, és onnan fentről minden szebbnek tűnt.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="stop-head" data-target="card-11">
+      <div class="capsule" id="cap-11"><span class="num">11</span></div>
+      <div class="stop-label">Ma</div>
+    </div>
+    <div class="reveal-card" id="card-11">
+      <div class="reveal-card-inner">
+        <img src="images/web/IMG_2434.jpg" alt="">
+        <div class="title">Egy éve, minden nap</div>
+        <div class="text">Innen jutottunk el idáig — és ez csak a kezdet.</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section class="finale">
+  <div class="finale-capsule" id="finale-capsule">
+    <span id="finale-capsule-text">nyisd ki</span>
+  </div>
+  <div class="finale-message" id="finale-message">
+    <h2><!-- CÍM -->Egy évvel később</h2>
+    <p>
+      <!-- CSERÉLD KI -->
+      Szia szerelmem. Ez az oldal az elmúlt egy évünkről szól —
+      minden apró pillanatról, amit együtt töltöttünk, és amiért
+      hálás vagyok minden nap.
+    </p>
+    <p>Alig várom, hogy megírjuk a következő fejezeteket is.</p>
+    <div class="signature">Szeretlek. — Miki</div>
+    <div class="bonus-line" id="bonus-line">
+      <!-- CSERÉLD KI -->
+      P.S. Végignéztél mind a 11 emléken. Ez pontosan az a fajta
+      figyelem és kitartás, amiért szeretlek. 🤍
+    </div>
+  </div>
+  <div class="finale-heart">1 ÉV • {{DÁTUM}}</div>
+</section>
+
+<script>
+  /* ================= Preloader (fake progress + flavor text) ================= */
+  (function(){
+    const labels = ["Csillagok gyújtása...", "Emlékek rendezése...", "Mr. Cica beengedése...", "Szív felhúzása...", "Már majdnem..."];
+    const ringFg = document.getElementById('ring-fg');
+    const pctEl = document.getElementById('preloader-pct');
+    const labelEl = document.getElementById('preloader-label');
+    const circumference = 326.7;
+    let pct = 0, labelIdx = 0;
+    const labelTimer = setInterval(() => {
+      labelIdx = (labelIdx + 1) % labels.length;
+      labelEl.textContent = labels[labelIdx];
+    }, 420);
+    const progressTimer = setInterval(() => {
+      pct += Math.random() * 14 + 6;
+      if (pct >= 100) {
+        pct = 100;
+        clearInterval(progressTimer);
+        clearInterval(labelTimer);
+        labelEl.textContent = "Kész.";
+        setTimeout(() => {
+          document.getElementById('preloader').classList.add('hide');
+        }, 280);
+      }
+      ringFg.style.strokeDashoffset = circumference * (1 - pct / 100);
+      pctEl.textContent = Math.floor(pct) + '%';
+    }, 220);
+  })();
+
+  /* ================= Starfield ================= */
+  const starsContainer = document.getElementById('stars');
+  const starCount = window.innerWidth < 600 ? 55 : 110;
+  for (let i = 0; i < starCount; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 2 + 0.5;
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    s.style.left = Math.random() * 100 + 'vw';
+    s.style.top = Math.random() * 100 + 'vh';
+    s.style.animationDelay = (Math.random() * 4) + 's';
+    starsContainer.appendChild(s);
+  }
+
+  const secretStar = document.createElement('div');
+  secretStar.className = 'secret-star';
+  secretStar.style.left = '85%';
+  secretStar.style.top = '22vh';
+  document.body.appendChild(secretStar);
+  secretStar.addEventListener('click', () => {
+    document.getElementById('secret-modal').classList.add('show');
+    chimeSecret();
+    burstConfettiSmall();
+  });
+
+  /* ================= Ambient shooting stars ================= */
+  function spawnShootingStar(big){
+    const el = document.createElement('div');
+    el.className = 'shooting-star';
+    const top = Math.random() * 40;
+    el.style.top = top + 'vh';
+    el.style.animation = `shoot ${big ? 1.1 : 1.4}s linear forwards`;
+    if (big) { el.style.transform = 'scale(2)'; }
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 1600);
+  }
+  function scheduleAmbientStars(){
+    setTimeout(() => {
+      spawnShootingStar(false);
+      scheduleAmbientStars();
+    }, 6000 + Math.random() * 5000);
+  }
+  scheduleAmbientStars();
+
+  /* ================= Sound engine (pure Web Audio, no files) ================= */
+  let soundOn = true;
+  let audioCtx = null;
+  function ensureAudio(){
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+  }
+  function playTone(freq, duration, type, delay, peak){
+    if (!soundOn) return;
+    ensureAudio();
+    type = type || 'sine'; delay = delay || 0; peak = peak || 0.15;
+    const t0 = audioCtx.currentTime + delay;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, t0);
+    gain.gain.setValueAtTime(0, t0);
+    gain.gain.linearRampToValueAtTime(peak, t0 + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0 + duration);
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.start(t0); osc.stop(t0 + duration + 0.05);
+  }
+  function chimeOpen(){ playTone(880, 0.35, 'sine'); }
+  function chimeClose(){ playTone(440, 0.2, 'sine', 0, 0.08); }
+  function chimeSecret(){
+    playTone(660, 0.25); setTimeout(() => playTone(880, 0.25), 120);
+    setTimeout(() => playTone(1320, 0.35), 240);
+  }
+  function chimeFinale(){
+    [523.25, 659.25, 784, 987.77].forEach((f, i) =>
+      setTimeout(() => playTone(f, 0.6, 'triangle', 0, 0.12), i * 90)
+    );
+  }
+  const soundToggle = document.getElementById('sound-toggle');
+  soundToggle.addEventListener('click', () => {
+    soundOn = !soundOn;
+    soundToggle.textContent = soundOn ? '🔈' : '🔇';
+    if (soundOn) { ensureAudio(); playTone(660, 0.2); }
+  });
+
+  /* ================= Touch sparkle trail ================= */
+  let lastSparkle = 0;
+  function spawnSparkle(x, y){
+    const now = Date.now();
+    if (now - lastSparkle < 55) return;
+    lastSparkle = now;
+    const s = document.createElement('div');
+    s.className = 'sparkle-dot';
+    s.textContent = Math.random() > 0.5 ? '✦' : '·';
+    s.style.left = x + 'px';
+    s.style.top = y + 'px';
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 700);
+  }
+  document.addEventListener('touchmove', (e) => {
+    const t = e.touches[0];
+    if (t) spawnSparkle(t.clientX, t.clientY);
+  }, { passive: true });
+  document.addEventListener('mousemove', (e) => {
+    if (e.buttons === 1) spawnSparkle(e.clientX, e.clientY);
+  });
+
+  /* ================= Progress tracking ================= */
+  const totalStops = 11;
+  const openedSet = new Set();
+  function updateProgress(){
+    document.getElementById('progress-count').textContent = openedSet.size + ' / ' + totalStops;
+    const finaleCap = document.getElementById('finale-capsule');
+    if (openedSet.size === totalStops) {
+      finaleCap.classList.add('ready');
+      if (!window.__confettiFired) {
+        window.__confettiFired = true;
+        burstConfetti();
+        chimeFinale();
+      }
+    }
+  }
+
+  /* ================= Accordion capsules ================= */
+  document.querySelectorAll('.stop-head').forEach(head => {
+    head.addEventListener('click', () => {
+      const cardId = head.getAttribute('data-target');
+      const card = document.getElementById(cardId);
+      const capId = 'cap-' + cardId.split('-')[1];
+      const cap = document.getElementById(capId);
+      const isOpen = card.classList.contains('show');
+
+      if (isOpen) {
+        card.classList.remove('show');
+        cap.classList.remove('opened');
+        chimeClose();
+      } else {
+        card.classList.add('show');
+        cap.classList.add('opened');
+        cap.classList.add('checked');
+        openedSet.add(cardId);
+        updateProgress();
+        chimeOpen();
+      }
+    });
+  });
+
+  /* ================= Finale capsule ================= */
+  const finaleCap = document.getElementById('finale-capsule');
+  const finaleMsg = document.getElementById('finale-message');
+  const finaleText = document.getElementById('finale-capsule-text');
+  let finaleTapCount = 0;
+  finaleCap.addEventListener('click', () => {
+    const nowOpen = finaleCap.classList.toggle('opened');
+    finaleMsg.classList.toggle('show');
+    finaleText.textContent = nowOpen ? '' : 'nyisd ki';
+    if (nowOpen) {
+      chimeOpen();
+      finaleTapCount++;
+      if (finaleTapCount >= 3) {
+        document.getElementById('bonus-line').classList.add('show');
+      }
+    } else {
+      chimeClose();
+    }
+  });
+
+  /* ================= Easter egg: title tap x5 = heart rain ================= */
+  const heroTitle = document.getElementById('hero-title');
+  let titleTaps = 0, titleTapTimer = null;
+  heroTitle.addEventListener('click', () => {
+    titleTaps++;
+    clearTimeout(titleTapTimer);
+    titleTapTimer = setTimeout(() => { titleTaps = 0; }, 1200);
+    if (titleTaps >= 5) {
+      titleTaps = 0;
+      heartRain();
+      chimeSecret();
+    }
+  });
+  function heartRain(){
+    const layer = document.getElementById('heart-burst-layer');
+    const hearts = ['💛', '✨', '🤍', '💫'];
+    for (let i = 0; i < 40; i++) {
+      setTimeout(() => {
+        const h = document.createElement('div');
+        h.className = 'flying-heart';
+        h.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+        h.style.left = Math.random() * 100 + 'vw';
+        h.style.bottom = '-10vh';
+        h.style.animationDuration = (2 + Math.random() * 1.5) + 's';
+        layer.appendChild(h);
+        setTimeout(() => h.remove(), 4000);
+      }, i * 60);
+    }
+  }
+
+  /* ================= Easter egg: double-tap anywhere = heart pop ================= */
+  let lastTap = 0;
+  document.addEventListener('touchend', function(e){
+    const now = Date.now();
+    if (now - lastTap < 300) {
+      const touch = e.changedTouches[0];
+      spawnTapHeart(touch.clientX, touch.clientY);
+    }
+    lastTap = now;
+  });
+  document.addEventListener('dblclick', function(e){ spawnTapHeart(e.clientX, e.clientY); });
+  function spawnTapHeart(x, y){
+    const h = document.createElement('div');
+    h.className = 'tap-heart';
+    h.textContent = '🤍';
+    h.style.left = x + 'px';
+    h.style.top = y + 'px';
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 900);
+  }
+
+  /* ================= Easter egg: long-press cat capsule = paw prints ================= */
+  const catCapsule = document.getElementById('cap-3');
+  let pressTimer = null;
+  function startPress(){ pressTimer = setTimeout(() => { pawWalk(); }, 550); }
+  function cancelPress(){ clearTimeout(pressTimer); }
+  catCapsule.addEventListener('touchstart', startPress);
+  catCapsule.addEventListener('touchend', cancelPress);
+  catCapsule.addEventListener('touchmove', cancelPress);
+  catCapsule.addEventListener('mousedown', startPress);
+  catCapsule.addEventListener('mouseup', cancelPress);
+  catCapsule.addEventListener('mouseleave', cancelPress);
+  function pawWalk(){
+    const startX = 10, endX = 90;
+    for (let i = 0; i < 6; i++) {
+      setTimeout(() => {
+        const p = document.createElement('div');
+        p.className = 'paw-print';
+        p.textContent = '🐾';
+        const progress = i / 5;
+        p.style.left = (startX + (endX - startX) * progress) + 'vw';
+        p.style.top = (30 + Math.sin(progress * Math.PI) * 8) + 'vh';
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 1900);
+      }, i * 160);
+    }
+  }
+
+  /* ================= Easter egg: swipe across hero = shooting star wish ================= */
+  const heroSection = document.querySelector('.hero');
+  let swipeStartX = 0, swipeStartT = 0;
+  heroSection.addEventListener('touchstart', (e) => {
+    swipeStartX = e.touches[0].clientX;
+    swipeStartT = Date.now();
+  });
+  heroSection.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - swipeStartX;
+    const dt = Date.now() - swipeStartT;
+    if (Math.abs(dx) > 90 && dt < 500) {
+      spawnShootingStar(true);
+      chimeSecret();
+      const toast = document.getElementById('wish-toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+  });
+
+  /* ================= Scroll-linked timeline fill ================= */
+  const timelineWrap = document.getElementById('timeline-wrap');
+  const timelineFill = document.getElementById('timeline-fill');
+  function updateTimelineFill(){
+    const rect = timelineWrap.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const total = rect.height;
+    const scrolled = Math.min(Math.max(vh * 0.5 - rect.top, 0), total);
+    const pct = total > 0 ? (scrolled / total) * 100 : 0;
+    timelineFill.style.height = pct + '%';
+  }
+  window.addEventListener('scroll', updateTimelineFill, { passive: true });
+  window.addEventListener('resize', updateTimelineFill);
+  updateTimelineFill();
+
+  /* ================= Confetti ================= */
+  function burstConfetti(){
+    const layer = document.getElementById('confetti-layer');
+    const colors = ['#e8b04b', '#f0dcc8', '#c98f2e', '#ffffff'];
+    for (let i = 0; i < 70; i++) {
+      setTimeout(() => {
+        const c = document.createElement('div');
+        c.className = 'confetti-piece';
+        c.style.left = Math.random() * 100 + 'vw';
+        c.style.background = colors[Math.floor(Math.random() * colors.length)];
+        c.style.animationDuration = (2.5 + Math.random() * 1.5) + 's';
+        layer.appendChild(c);
+        setTimeout(() => c.remove(), 4200);
+      }, i * 25);
+    }
+  }
+  function burstConfettiSmall(){
+    const layer = document.getElementById('confetti-layer');
+    const colors = ['#e8b04b', '#f0dcc8'];
+    for (let i = 0; i < 20; i++) {
+      setTimeout(() => {
+        const c = document.createElement('div');
+        c.className = 'confetti-piece';
+        c.style.left = Math.random() * 100 + 'vw';
+        c.style.background = colors[Math.floor(Math.random() * colors.length)];
+        layer.appendChild(c);
+        setTimeout(() => c.remove(), 3400);
+      }, i * 30);
+    }
+  }
+</script>
+
+</body>
+</html>
