@@ -2,7 +2,7 @@ import { heartPoints } from './lib/heart.js';
 import { createShakeDetector } from './lib/shake.js';
 import { confetti } from './fx.js';
 
-const HITS = 35;
+const HITS = 10;
 const HEART_FILL_H = 90;
 
 // Záró játék: csak a legvégén, sok rázásra telik meg a szív, utána a képekből szív lesz.
@@ -12,6 +12,7 @@ export function mountShake(el, { photos, sound, reduce }) {
   const text = el.querySelector('#shake-text');
   const heart = el.querySelector('#shake-heart');
   const fill = el.querySelector('#shake-fill');
+  const count = el.querySelector('#shake-count');
   const detect = createShakeDetector({ threshold: 13, minGap: 110 });
 
   let inView = false;
@@ -31,6 +32,8 @@ export function mountShake(el, { photos, sound, reduce }) {
     sound.paper();
     navigator.vibrate?.(15);
     const p = hits / HITS;
+    count.textContent = `${hits} / ${HITS}`;
+    gsap.fromTo(count, { scale: 1.4 }, { scale: 1, duration: 0.35, ease: 'back.out(3)' });
     gsap.to(fill, { attr: { y: HEART_FILL_H * (1 - p), height: HEART_FILL_H * p }, duration: 0.2 });
     gsap.fromTo(heart, { rotation: hits % 2 ? -7 : 7 }, { rotation: 0, duration: 0.35, ease: 'elastic.out(1.4, 0.3)' });
     if (hits === Math.round(HITS * 0.5)) text.textContent = 'még, még!';
@@ -65,6 +68,8 @@ export function mountShake(el, { photos, sound, reduce }) {
     }
     armed = true;
     btn.hidden = true;
+    count.textContent = `0 / ${HITS}`;
+    count.hidden = false;
     heart.classList.add('armed');
     if (allowed) {
       text.textContent = 'rázd meg a telefont, erősen!';

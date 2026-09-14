@@ -180,6 +180,7 @@ button{font:inherit;color:inherit}
 .shake-heart.tappable{cursor:pointer}
 #shake-fill{fill:var(--accent)}
 .heart-line{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linejoin:round}
+.shake-count{font-size:52px;line-height:1;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
 .shake-text{min-height:42px;font-size:30px;color:var(--ink)}
 .shake-btn{
   margin-top:14px;font-size:30px;padding:8px 32px;border:none;border-radius:40px;cursor:pointer;

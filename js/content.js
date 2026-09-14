@@ -21,7 +21,7 @@ export const chapters = [
   },
   {
     id: 'mr-cica',
-    title: 'Mr. Cica',
+    title: 'Cicababa',
     subtitle: 'a harmadik tag',
     photos: [
       { src: img('IMG_2831.jpg'), caption: 'a kocsiban', rot: -3 },
@@ -51,7 +51,7 @@ export const chapters = [
     title: 'Halloween',
     subtitle: '',
     photos: [
-      { src: img('IMG_3631.jpg'), caption: 'Joker és Harley', rot: -2 },
+      { src: img('IMG_3631.jpg'), caption: 'Joker', rot: -2 },
     ],
     interaction: null,
   },

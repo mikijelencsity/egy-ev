@@ -33,7 +33,7 @@ Minden fejezet egy „napló-oldalpár”: kézzel kirajzolódó fejezetcím (SV
 | # | Fejezet | Képek (`images/web/`) | Interakció |
 |---|---|---|---|
 | 1 | Kezdet | `IMG_0125` (tükrös szelfi otthon), `IMG_2739` (előszobai tükör) | **Széthúzás:** a két kép egymáson fekszik, oldalra húzással szétválnak |
-| 2 | Mr. Cica | `IMG_2831` (cica a kocsiban), `3C30B8D2-…` (cica a karban), `IMG_6461` (közeli cicás kép) | **Lenyomva tartás** a cicás polaroidon → mancsnyomok sétálnak át a lapon, és előbukkan a titkos mém (`354993DE-…`) |
+| 2 | Cicababa | `IMG_2831` (cica a kocsiban), `3C30B8D2-…` (cica a karban), `IMG_6461` (közeli cicás kép) | **Lenyomva tartás** a cicás polaroidon → mancsnyomok sétálnak át a lapon, és előbukkan a titkos mém (`354993DE-…`) |
 | 3 | Randik | `IMG_4422` (étterem), `att` (esti tér), `IMG_5685` (sapkás vacsora) | Görgetésre egymás fölé csúszó képek (nincs külön feladat) |
 | 4 | Halloween | `IMG_3631` (Joker & Harley) | nincs (a kvízzár user kérésére kikerült, 2026-09-14) |
 | 5 | Gyulán | `IMG_4079` (medence), `IMG_4043` (tükrös plafon) | **Pára-letörlés:** a képek bepárásodtak, ujjal letörölhetők |
@@ -45,7 +45,7 @@ Minden fejezet egy „napló-oldalpár”: kézzel kirajzolódó fejezetcím (SV
 Mind a 20 kép szerepel. Egyik interakció sem akasztja meg a görgetést: ha kihagyja, az oldal továbbmegy, a feladat félkész állapotban marad.
 ### 3. Finálé
 1. A záró levél kézírással „íródik ki” a lapra (soronként megjelenő Caveat szöveg), aláírás: Miki.
-2. **Rázós zárás** („még egy utolsó dolog”): üres, kézzel rajzolt szív és „kezdjük” gomb (iOS-en ez kéri a mozgásérzékelő-engedélyt). Rázás csak ezen a képernyőn számít, a gomb megnyomása után. 35 rázás tölti meg a szívet (közben „még, még!”, „mindjárt...”, rezgés). Ha nincs mozgásadat 2,5 mp-en belül, vagy nincs engedély: 35 koppintás a szívre.
+2. **Rázós zárás** („még egy utolsó dolog”): üres, kézzel rajzolt szív és „kezdjük” gomb (iOS-en ez kéri a mozgásérzékelő-engedélyt). Rázás csak ezen a képernyőn számít, a gomb megnyomása után. 10 rázás tölti meg a szívet, alatta „3 / 10” számláló mutatja az állást (közben „még, még!”, „mindjárt...”, rezgés). Ha nincs mozgásadat 2,5 mp-en belül, vagy nincs engedély: 10 koppintás a szívre.
 3. Utána teljes képernyős réteg: a 19 fejezetkép felülről lepotyog és szívvé áll (a felső bemélyedés üresen marad, a csúcson egy kép), közepén „Nagyon szeretlek!” konfettivel, alul „folytatás következik...”. Bármelyik képre koppintva felnagyítódik, újra koppintva visszaáll.
 
 A gyertyafújás user kérésére kikerült (2026-09-14). Amíg a levél nincs megírva (`letter.placeholder: true`), a levél és a fejléce rejtve marad.
