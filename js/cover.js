@@ -1,5 +1,5 @@
 // Borító: koppintásra vagy felfelé húzásra kinyílik, addig az oldal nem görgethető.
-export function mountCover(el, { sound, onOpen }) {
+export function mountCover(el, { sound, onGesture, onOpen }) {
   const { gsap } = window;
   const cover = el.querySelector('#book-cover');
   const book = el.querySelector('.book');
@@ -11,6 +11,7 @@ export function mountCover(el, { sound, onOpen }) {
     opened = true;
     sound.unlock();
     sound.page();
+    onGesture?.();
     el.classList.add('opening');
     gsap.timeline({ onComplete: () => el.remove() })
       .to(cover, { rotationY: -168, duration: 1.3, ease: 'power2.inOut' })

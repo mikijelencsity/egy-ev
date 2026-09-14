@@ -14,7 +14,7 @@ A jelenlegi `index.html` (kinyitható kártyás idővonal) teljesen lecserélőd
 |---|---|
 | Koncepció | Görgetős film (gerinc) + interaktív megállók |
 | Stílus | Analóg napló: krémszínű papír, polaroidok, ragasztószalag, kézírás (Caveat), enyhe filmszemcse, rozsdavörös kiemelőszín (`#b5452b`) |
-| Zene | Nincs. Csak generált hanghatások (lapozás, papírsuhogás, kaparás, koppanás), némítógombbal |
+| Zene | Gucci Mane: Point In My Life (user kérésére, 2026-09-14; eredetileg nem volt zene). `audio/zene.mp3`, 128 kbps, címkék nélkül. A borító kinyitásakor (érintésre) indul, felúszik, ismétlődik, háttérbe váltáskor szünetel. Mellette a generált hanghatások; a némítógomb mindkettőt némítja. A jogvédett dal a nyilvános repóban van: a user döntése, a DMCA-levétel kockázatát jeleztem |
 | Szövegek | A fejezetfeliratokat Claude írja piszkozatnak (csak a fotón látható dolgokra építve, kitalált tény nélkül). A záró levelet Miki írja, addig jól látható helykitöltő |
 | Közzététel | GitHub Pages (HTTPS), QR-kóddal. Nyilvános vs. privát repó kérdése a feltöltés előtt a userrel tisztázandó |
 | Eszköz | Álló telefon, elsődleges nézet 390×844. Asztali gépen középre igazított, telefonszélességű oszlop |

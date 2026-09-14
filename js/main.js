@@ -1,4 +1,5 @@
-import { START_DATE, chapters, letter } from './content.js';
+import { START_DATE, MUSIC, chapters, letter } from './content.js';
+import { createMusic } from './music.js';
 import { sound } from './sound.js';
 import { preload } from './loader.js';
 import { mountCover } from './cover.js';
@@ -16,6 +17,7 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 window.scrollTo(0, 0);
 
 const sections = renderChapters(document.getElementById('chapters'), chapters);
+const music = createMusic(MUSIC);
 
 async function boot() {
   const fill = document.getElementById('loader-fill');
@@ -48,8 +50,10 @@ async function boot() {
   loader.classList.add('hide');
   setTimeout(() => loader.remove(), 700);
 
+  music.warm();
   mountCover(document.getElementById('cover'), {
     sound,
+    onGesture: () => music.start(),
     onOpen() {
       document.documentElement.classList.remove('locked');
       mountCounter(document.getElementById('counter'), { start: START_DATE, reduce });
@@ -62,6 +66,7 @@ async function boot() {
 const muteBtn = document.getElementById('mute');
 muteBtn.addEventListener('click', () => {
   sound.setMuted(!sound.muted);
+  music.setMuted(sound.muted);
   muteBtn.classList.toggle('off', sound.muted);
   muteBtn.textContent = sound.muted ? '🔇' : '🔊';
   muteBtn.setAttribute('aria-pressed', String(sound.muted));

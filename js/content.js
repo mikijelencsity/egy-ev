@@ -6,6 +6,9 @@
 
 export const START_DATE = new Date(2025, 8, 14, 0, 0, 0); // 2025. szeptember 14.
 
+// Háttérzene: a borító kinyitásakor indul.
+export const MUSIC = 'audio/zene.mp3';
+
 const img = name => `images/web/${name}`;
 
 export const chapters = [

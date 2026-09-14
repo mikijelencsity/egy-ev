@@ -1,7 +1,11 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readdirSync } from 'node:fs';
-import { START_DATE, chapters, letter } from '../js/content.js';
+import { readdirSync, existsSync } from 'node:fs';
+import { START_DATE, MUSIC, chapters, letter } from '../js/content.js';
+
+test('a zenefájl létezik', () => {
+  assert.ok(existsSync(new URL(`../${MUSIC}`, import.meta.url)), MUSIC);
+});
 
 const files = readdirSync(new URL('../images/web/', import.meta.url));
 const refs = chapters
