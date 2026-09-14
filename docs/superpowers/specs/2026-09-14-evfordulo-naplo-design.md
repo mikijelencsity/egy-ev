@@ -45,7 +45,8 @@ Minden fejezet egy „napló-oldalpár”: kézzel kirajzolódó fejezetcím (SV
 Mind a 20 kép szerepel. Egyik interakció sem akasztja meg a görgetést: ha kihagyja, az oldal továbbmegy, a feladat félkész állapotban marad.
 ### 3. Finálé
 1. A záró levél kézírással „íródik ki” a lapra (soronként megjelenő Caveat szöveg), aláírás: Miki.
-2. Az utolsó lap: „folytatás következik…”, odagörgetéskor papírkonfetti.
+2. **Rázós zárás** („még egy utolsó dolog”): üres, kézzel rajzolt szív és „kezdjük” gomb (iOS-en ez kéri a mozgásérzékelő-engedélyt). Rázás csak ezen a képernyőn számít, a gomb megnyomása után. 35 rázás tölti meg a szívet (közben „még, még!”, „mindjárt...”, rezgés). Ha nincs mozgásadat 2,5 mp-en belül, vagy nincs engedély: 35 koppintás a szívre.
+3. Utána teljes képernyős réteg: a 19 fejezetkép felülről lepotyog és szívvé áll (a felső bemélyedés üresen marad, a csúcson egy kép), közepén „Nagyon szeretlek!” konfettivel, alul „folytatás következik...”. Bármelyik képre koppintva felnagyítódik, újra koppintva visszaáll.
 
 A gyertyafújás user kérésére kikerült (2026-09-14). Amíg a levél nincs megírva (`letter.placeholder: true`), a levél és a fejléce rejtve marad.
 
@@ -67,7 +68,11 @@ js/sound.js        — Web Audio hanghatások (zajból/oszcillátorból generál
 js/cover.js        — borító kinyitása
 js/counter.js      — napszámláló
 js/interactions/   — spread.js, hold.js, fog.js, scatter.js, scratch.js
-js/finale.js       — levél, záró lap, konfetti
+js/finale.js       — levél (rejtve, amíg helykitöltő)
+js/shake.js        — rázós zárás, képekből kirakott szív, „Nagyon szeretlek!”
+js/fx.js           — papírkonfetti
+js/lib/heart.js    — szív-pontok ívhossz szerint (tesztelt)
+js/lib/shake.js    — rázás-érzékelő (tesztelt)
 images/web/        — a meglévő 20 kép
 ```
 

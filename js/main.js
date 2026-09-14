@@ -6,6 +6,7 @@ import { mountCounter } from './counter.js';
 import { renderChapters, animateChapters } from './chapters.js';
 import { registry } from './interactions/index.js';
 import { mountFinale } from './finale.js';
+import { mountShake } from './shake.js';
 
 const { gsap, ScrollTrigger } = window;
 gsap.registerPlugin(ScrollTrigger);
@@ -31,7 +32,12 @@ async function boot() {
       registry[type].mount(s.querySelector('.ch-body'), { sound, chapter: chapters[i], reduce });
     }
   });
-  mountFinale(document.getElementById('finale'), { letter, sound, reduce });
+  mountFinale(document.getElementById('finale'), { letter, reduce });
+  mountShake(document.getElementById('shake'), {
+    photos: chapters.flatMap(c => c.photos.map(p => p.src)),
+    sound,
+    reduce,
+  });
 
   gsap.to('#spine i', {
     scaleY: 1, ease: 'none',
@@ -64,7 +70,7 @@ muteBtn.addEventListener('click', () => {
 // Dupla koppintás bárhol: szív
 let lastTap = { t: 0, x: 0, y: 0 };
 document.addEventListener('pointerup', e => {
-  if (e.target.closest('canvas, button, #cover, .is-stack, .is-holdable')) return;
+  if (e.target.closest('canvas, button, #cover, .is-stack, .is-holdable, #shake-heart, #love')) return;
   const now = performance.now();
   if (now - lastTap.t < 320 && Math.hypot(e.clientX - lastTap.x, e.clientY - lastTap.y) < 40) {
     heart(e.clientX, e.clientY);

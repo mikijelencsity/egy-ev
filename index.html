@@ -58,12 +58,33 @@
     </header>
     <div class="letter" id="letter"></div>
 
-    <div class="the-end" id="the-end">
-      <p class="hand">folytatás következik...</p>
-      <small>2025. 09. 14. óta</small>
-    </div>
+    <section id="shake" class="scene">
+      <span class="ch-num">még egy utolsó dolog</span>
+      <div class="shake-heart" id="shake-heart">
+        <svg viewBox="-4 -4 108 98" aria-hidden="true">
+          <defs>
+            <clipPath id="heart-clip">
+              <path d="M50 88 C 18 66, 2 46, 2 27 C 2 12, 13 2, 27 2 C 38 2, 46 9, 50 18 C 54 9, 62 2, 73 2 C 87 2, 98 12, 98 27 C 98 46, 82 66, 50 88 Z"/>
+            </clipPath>
+          </defs>
+          <rect id="shake-fill" x="0" y="90" width="100" height="0" clip-path="url(#heart-clip)"/>
+          <path class="heart-line" d="M50 88 C 18 66, 2 46, 2 27 C 2 12, 13 2, 27 2 C 38 2, 46 9, 50 18 C 54 9, 62 2, 73 2 C 87 2, 98 12, 98 27 C 98 46, 82 66, 50 88 Z"/>
+        </svg>
+      </div>
+      <p class="shake-text hand" id="shake-text" aria-live="polite"></p>
+      <button class="shake-btn hand" id="shake-start" type="button">kezdjük</button>
+    </section>
   </section>
 </main>
+
+<div id="love" hidden>
+  <div class="love-stage"></div>
+  <div class="love-words hand">Nagyon<br>szeretlek!</div>
+  <div class="love-foot">
+    <p class="hand">folytatás következik...</p>
+    <small>2025. 09. 14. óta</small>
+  </div>
+</div>
 
 <div id="fx-layer" aria-hidden="true"></div>
 
