@@ -33,7 +33,7 @@ export const chapters = [
       type: 'hold',
       target: 0,
       hint: 'tartsd lenyomva a cicát 🐾',
-      secret: { src: img('354993DE-2934-499B-A307-53176BEB310B.jpg'), caption: 'a hivatalos portréja' },
+      secret: { src: img('354993DE-2934-499B-A307-53176BEB310B.jpg'), caption: 'a hivatalos portréja', wide: true },
     },
   },
   {
@@ -41,8 +41,8 @@ export const chapters = [
     title: 'Randik',
     subtitle: 'vacsorák, esték, séták',
     photos: [
-      { src: img('IMG_4079.jpg'), caption: 'ebéd kettesben', rot: 3 },
-      { src: img('att.jpg'), caption: 'esti séta a téren', rot: -4 },
+      { src: img('IMG_4422.jpg'), caption: 'ebéd kettesben', rot: 3 },
+      { src: img('att.jpg'), caption: 'esti séta a téren', rot: -4, wide: true },
       { src: img('IMG_5685.jpg'), caption: 'sapkában is a legszebb', rot: 2 },
     ],
     interaction: null,
@@ -61,7 +61,7 @@ export const chapters = [
     title: 'Wellness',
     subtitle: 'csak mi ketten',
     photos: [
-      { src: img('IMG_4133.jpg'), caption: 'medence, csend, te', rot: -3 },
+      { src: img('IMG_4079.jpg'), caption: 'medence, csend, te', rot: -3 },
       { src: img('IMG_4043.jpg'), caption: 'a plafonon is tükör volt 🙈', rot: 4 },
     ],
     interaction: { type: 'fog', hint: 'bepárásodtak, töröld le őket' },
@@ -81,7 +81,7 @@ export const chapters = [
     title: 'Meglepetés',
     subtitle: 'amikor hazaértél',
     photos: [
-      { src: img('IMG_4422.jpg'), caption: 'a lufi mindent elmondott', rot: 2 },
+      { src: img('IMG_4133.jpg'), caption: 'a lufi mindent elmondott', rot: 2 },
     ],
     interaction: { type: 'scratch', photo: 0, hint: 'kapard le' },
   },
@@ -90,10 +90,10 @@ export const chapters = [
     title: 'Nyár',
     subtitle: 'amit sosem felejtünk el',
     photos: [
-      { src: img('IMG_7680.jpg'), caption: 'a tengerparton', rot: -3 },
+      { src: img('IMG_7680.jpg'), caption: 'a tengerparton', rot: -3, wide: true },
       { src: img('IMG_1320.jpg'), caption: 'esti csók vacsora közben', rot: 4 },
       { src: img('IMG_6239.jpg'), caption: 'cowboykalapban is te vagy a legszebb', rot: -4 },
-      { src: img('IMG_7735.jpg'), caption: 'fent az óriáskeréken', rot: 3 },
+      { src: img('IMG_7735.jpg'), caption: 'fent az óriáskeréken', rot: 3, wide: true },
     ],
     interaction: { type: 'scratch', photo: 3, hint: 'az utolsót kapard le' },
   },

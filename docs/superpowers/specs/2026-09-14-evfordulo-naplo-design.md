@@ -34,11 +34,11 @@ Minden fejezet egy „napló-oldalpár”: kézzel kirajzolódó fejezetcím (SV
 |---|---|---|---|
 | 1 | Kezdet | `IMG_0125` (tükrös szelfi otthon), `IMG_2739` (előszobai tükör) | **Széthúzás:** a két kép egymáson fekszik, oldalra húzással szétválnak |
 | 2 | Mr. Cica | `IMG_2831` (cica a kocsiban), `3C30B8D2-…` (cica a karban), `IMG_6461` (közeli cicás kép) | **Lenyomva tartás** a cicás polaroidon → mancsnyomok sétálnak át a lapon, és előbukkan a titkos mém (`354993DE-…`) |
-| 3 | Randik | `IMG_4079` (étterem), `att` (esti tér), `IMG_5685` (sapkás vacsora) | Görgetésre egymás fölé csúszó képek (nincs külön feladat) |
+| 3 | Randik | `IMG_4422` (étterem), `att` (esti tér), `IMG_5685` (sapkás vacsora) | Görgetésre egymás fölé csúszó képek (nincs külön feladat) |
 | 4 | Halloween | `IMG_3631` (Joker & Harley) | **Zárolt emlék:** a kép homályos, lakat van rajta. Kérdés: „Minek öltöztünk Halloweenkor?” — Batman és Macskanő / **Joker és Harley Quinn** / Vámpírok. Rossz válasznál rázkódás + halvány tipp, akármennyiszer próbálhat. Helyes válasznál a lakat lepattan, a kép kitisztul |
-| 5 | Wellness | `IMG_4133` (medence), `IMG_4043` (tükrös plafon) | **Pára-letörlés:** a képek bepárásodtak, ujjal letörölhetők |
+| 5 | Wellness | `IMG_4079` (medence), `IMG_4043` (tükrös plafon) | **Pára-letörlés:** a képek bepárásodtak, ujjal letörölhetők |
 | 6 | Tükrös képeink | `IMG_3279` (bolt), `IMG_4773` (fürdőszoba) | **Kupac-szétdobás:** a polaroidok kupacban vannak, pöccintésre szétrepülnek |
-| 7 | Meglepetés | `IMG_4422` (lufi, ajándékok) | **Kaparós kép** |
+| 7 | Meglepetés | `IMG_4133` (lufi, ajándékok) | **Kaparós kép** |
 | 8 | Nyár | `IMG_7680` (tengerparti csók), `IMG_1320` (esti étterem), `IMG_6239` (cowboykalap), `IMG_7735` (óriáskerék) | A papír háttere görgetésre naplemente-színűre vált. Az utolsó kép **kaparós** |
 | 9 | Csak te és én | `IMG_2434` (kupak) | Görgetésre ráközelítés a „CSAK TE ÉS ÉN” feliratra |
 

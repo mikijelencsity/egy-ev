@@ -45,7 +45,7 @@ Interakció-modul szerződés: `mount(el, ctx)`, ahol `el` a fejezet interakció
 
 **Files:** Create `js/lib/time.js`, `js/lib/quiz.js`, `js/lib/erase.js`, `tests/logic.test.mjs`, `package.json` (`{"type":"module","scripts":{"test":"node --test tests/"}}`)
 
-- [ ] Step 1: teszt írása:
+- [x] Step 1: teszt írása:
 
 ```js
 import { test } from 'node:test';
@@ -81,16 +81,16 @@ test('erasedRatio: alfa-csatorna alapján', () => {
 });
 ```
 
-- [ ] Step 2: `npm test` → FAIL (a modulok nem léteznek)
-- [ ] Step 3: implementáció (`elapsed` a különbség ms-ból, negatívnál 0; `checkAnswer` = `index === quiz.correct`; `erasedRatio` minden `step`-edik pixel alfáját nézi, `alpha < 128` = radírozott)
-- [ ] Step 4: `npm test` → PASS
-- [ ] Step 5: commit
+- [x] Step 2: `npm test` → FAIL (a modulok nem léteznek)
+- [x] Step 3: implementáció (`elapsed` a különbség ms-ból, negatívnál 0; `checkAnswer` = `index === quiz.correct`; `erasedRatio` minden `step`-edik pixel alfáját nézi, `alpha < 128` = radírozott)
+- [x] Step 4: `npm test` → PASS
+- [x] Step 5: commit
 
 ### Task 2: Tartalom + épség-teszt
 
 **Files:** Create `js/content.js`, `tests/content.test.mjs`
 
-- [ ] Step 1: teszt: minden `images/web/*` fájlra pontosan egy hivatkozás van a `chapters` képeiben (a `hold` interakció `secret` képe is számít); minden hivatkozott fájl létezik; 9 fejezet; az interakció-típusok a `{null, spread, hold, quiz, fog, scatter, scratch}` halmazból; a kvíz `correct` indexe érvényes; `START_DATE` = 2025-09-14 00:00 helyi idő.
+- [x] Step 1: teszt: minden `images/web/*` fájlra pontosan egy hivatkozás van a `chapters` képeiben (a `hold` interakció `secret` képe is számít); minden hivatkozott fájl létezik; 9 fejezet; az interakció-típusok a `{null, spread, hold, quiz, fog, scatter, scratch}` halmazból; a kvíz `correct` indexe érvényes; `START_DATE` = 2025-09-14 00:00 helyi idő.
 
 ```js
 import { test } from 'node:test';
@@ -123,74 +123,74 @@ test('kezdődátum', () => {
 test('levél', () => assert.ok(Array.isArray(letter.paragraphs) && letter.signature));
 ```
 
-- [ ] Step 2: `npm test` → FAIL
-- [ ] Step 3: `content.js` a spec fejezettáblázata szerint, feliratok em-dash nélkül, csak a fotón látható dolgokra építve; levél: helykitöltő `placeholder: true`
-- [ ] Step 4: `npm test` → PASS
-- [ ] Step 5: commit
+- [x] Step 2: `npm test` → FAIL
+- [x] Step 3: `content.js` a spec fejezettáblázata szerint, feliratok em-dash nélkül, csak a fotón látható dolgokra építve; levél: helykitöltő `placeholder: true`
+- [x] Step 4: `npm test` → PASS
+- [x] Step 5: commit
 
 ### Task 3: Váz, stílus, töltőképernyő, hang
 
 **Files:** Replace `index.html`; Create `css/style.css`, `js/loader.js`, `js/sound.js`, `js/main.js` (kezdeti)
 
-- [ ] Step 1: `index.html` váz (`lang="hu"`, `noindex`, viewport `viewport-fit=cover`, GSAP 3.12.5 `gsap.min.js` + `ScrollTrigger.min.js` a cdnjs-ről, `<script type="module" src="js/main.js">`)
-- [ ] Step 2: `style.css` alap: papír-tokenek (`--paper #efe6d6`, `--ink #3b2f26`, `--accent #b5452b`, `--tape rgba(230,210,160,.75)`), SVG-zaj szemcse fixed rétegen, `max-width: 480px` középre, `100svh` jelenetek, polaroid és szalag komponens, `prefers-reduced-motion`
-- [ ] Step 3: `loader.js` + `sound.js` (zajpuffer-alapú papírsuhogás/kaparás, oszcillátoros koppanás/csengés; `unlock()` első gesztusnál)
-- [ ] Step 4: ellenőrzés: `http://localhost:5500` betölt, a töltőképernyő 100%-ra fut és eltűnik, a konzol hibamentes
-- [ ] Step 5: commit
+- [x] Step 1: `index.html` váz (`lang="hu"`, `noindex`, viewport `viewport-fit=cover`, GSAP 3.12.5 `gsap.min.js` + `ScrollTrigger.min.js` a cdnjs-ről, `<script type="module" src="js/main.js">`)
+- [x] Step 2: `style.css` alap: papír-tokenek (`--paper #efe6d6`, `--ink #3b2f26`, `--accent #b5452b`, `--tape rgba(230,210,160,.75)`), SVG-zaj szemcse fixed rétegen, `max-width: 480px` középre, `100svh` jelenetek, polaroid és szalag komponens, `prefers-reduced-motion`
+- [x] Step 3: `loader.js` + `sound.js` (zajpuffer-alapú papírsuhogás/kaparás, oszcillátoros koppanás/csengés; `unlock()` első gesztusnál)
+- [x] Step 4: ellenőrzés: `http://localhost:5500` betölt, a töltőképernyő 100%-ra fut és eltűnik, a konzol hibamentes
+- [x] Step 5: commit
 
 ### Task 4: Borító + számláló
 
 **Files:** Create `js/cover.js`, `js/counter.js`; Modify `js/main.js`, `css/style.css`
 
-- [ ] Step 1: borító: bőrkötés-textúra CSS-ből, „1 év” + nevek Caveat-tel, „húzd fel / koppints” jelzés; koppintás vagy >60 px felhúzás → `rotateY(-160deg)` lapfordulás (perspective), `sound.unlock(); sound.page()`, `html.locked` levétele, `onOpen()`
-- [ ] Step 2: számláló: ScrollTrigger belépéskor 0-ról felpörgő napszám (1,6 s easeOut), utána másodpercenként frissülő `óó : pp : mm` sor `elapsed()`-del
-- [ ] Step 3: ellenőrzés böngészőben (390×844): nyitás előtt nem görget, nyitás után igen; a számláló 365-öt mutat; képernyőkép
-- [ ] Step 4: commit
+- [x] Step 1: borító: bőrkötés-textúra CSS-ből, „1 év” + nevek Caveat-tel, „húzd fel / koppints” jelzés; koppintás vagy >60 px felhúzás → `rotateY(-160deg)` lapfordulás (perspective), `sound.unlock(); sound.page()`, `html.locked` levétele, `onOpen()`
+- [x] Step 2: számláló: ScrollTrigger belépéskor 0-ról felpörgő napszám (1,6 s easeOut), utána másodpercenként frissülő `óó : pp : mm` sor `elapsed()`-del
+- [x] Step 3: ellenőrzés böngészőben (390×844): nyitás előtt nem görget, nyitás után igen; a számláló 365-öt mutat; képernyőkép
+- [x] Step 4: commit
 
 ### Task 5: Fejezetek renderelése + görgetős animáció
 
 **Files:** Create `js/chapters.js`; Modify `js/main.js`, `css/style.css`
 
-- [ ] Step 1: `renderChapters`: fejezetenként `<section class="chapter" id>` fejezetszám, kézírásos cím + SVG aláhúzás (`stroke-dashoffset` kirajzolás), alcím, polaroidok (`rot` elforgatással, szalaggal, felirattal), `[data-interaction]` konténer az interakciónak
-- [ ] Step 2: `animateChapters`: cím-kirajzolás, polaroidok „beesése” (y, rotate, scale, `scrub`), lassú ráközelítés a képen; a Nyár fejezetnél a `body` háttérszíne naplemente-árnyalatra vált (ScrollTrigger `onUpdate`); a „Csak te és én” fejezet pin + scale ráközelítés
-- [ ] Step 3: gerinc-haladásjelző (`scaleY` a teljes görgetésre) + dupla koppintásos szív
-- [ ] Step 4: ellenőrzés: mind a 9 fejezet megjelenik, a képek a helyükön, képernyőkép fejezetenként, konzol tiszta
-- [ ] Step 5: commit
+- [x] Step 1: `renderChapters`: fejezetenként `<section class="chapter" id>` fejezetszám, kézírásos cím + SVG aláhúzás (`stroke-dashoffset` kirajzolás), alcím, polaroidok (`rot` elforgatással, szalaggal, felirattal), `[data-interaction]` konténer az interakciónak
+- [x] Step 2: `animateChapters`: cím-kirajzolás, polaroidok „beesése” (y, rotate, scale, `scrub`), lassú ráközelítés a képen; a Nyár fejezetnél a `body` háttérszíne naplemente-árnyalatra vált (ScrollTrigger `onUpdate`); a „Csak te és én” fejezet pin + scale ráközelítés
+- [x] Step 3: gerinc-haladásjelző (`scaleY` a teljes görgetésre) + dupla koppintásos szív
+- [x] Step 4: ellenőrzés: mind a 9 fejezet megjelenik, a képek a helyükön, képernyőkép fejezetenként, konzol tiszta
+- [x] Step 5: commit
 
 ### Task 6: Radír-alapú interakciók (kaparás, pára)
 
 **Files:** Create `js/interactions/eraser.js`, `scratch.js`, `fog.js`, `index.js`; Modify `js/main.js`, `css/style.css`
 
-- [ ] Step 1: `createEraser`: DPR-helyes vászon, `paint(ctx,w,h)` az induló réteg, pointer eventek, `destination-out` vonalhúzás az előző pontból, 250 ms-onként `erasedRatio`, `doneAt` (kaparás 0,55, pára 0,45) átlépésekor a maradék elhalványul és `onDone()`
-- [ ] Step 2: `scratch`: arany-bézs „kaparós sorsjegy” réteg „kapard le” felirattal, `sound.scratch()` húzás közben (throttle)
-- [ ] Step 3: `fog`: fehéres, elmosott párás réteg csepp-mintával, „töröld le” felirat
-- [ ] Step 4: ellenőrzés: egérrel lekaparva a kép előtűnik, a vásznon kívül a görgetés működik
-- [ ] Step 5: commit
+- [x] Step 1: `createEraser`: DPR-helyes vászon, `paint(ctx,w,h)` az induló réteg, pointer eventek, `destination-out` vonalhúzás az előző pontból, 250 ms-onként `erasedRatio`, `doneAt` (kaparás 0,55, pára 0,45) átlépésekor a maradék elhalványul és `onDone()`
+- [x] Step 2: `scratch`: arany-bézs „kaparós sorsjegy” réteg „kapard le” felirattal, `sound.scratch()` húzás közben (throttle)
+- [x] Step 3: `fog`: fehéres, elmosott párás réteg csepp-mintával, „töröld le” felirat
+- [x] Step 4: ellenőrzés: egérrel lekaparva a kép előtűnik, a vásznon kívül a görgetés működik
+- [x] Step 5: commit
 
 ### Task 7: Mozgás-alapú interakciók (széthúzás, lenyomás, kvíz, szétdobás)
 
 **Files:** Create `js/interactions/spread.js`, `hold.js`, `quiz.js`, `scatter.js`; Modify `index.js`, `css/style.css`
 
-- [ ] Step 1: `spread`: a két polaroid egymáson; vízszintes húzásra (`touch-action: pan-y`) szétcsúsznak a húzás arányában, 80 px felett a helyükre pattannak
-- [ ] Step 2: `hold`: 600 ms lenyomás a cicás képen (körkörös töltődés-jelző) → 6 mancsnyom sétál át, `sound.pop()`, előbukkan a titkos polaroid a felirattal
-- [ ] Step 3: `quiz`: homályos kép (`filter: blur(14px)`) + lakat; 3 gomb; rossz → rázás + tipp, jó → lakat lepattan, blur 0, `sound.chime()`
-- [ ] Step 4: `scatter`: kupac; koppintásra/húzásra a polaroidok előre számolt helyekre repülnek (GSAP), újra koppintva visszarendeződnek
-- [ ] Step 5: ellenőrzés böngészőben mind a négyre, képernyőképpel
-- [ ] Step 6: commit
+- [x] Step 1: `spread`: a két polaroid egymáson; vízszintes húzásra (`touch-action: pan-y`) szétcsúsznak a húzás arányában, 80 px felett a helyükre pattannak
+- [x] Step 2: `hold`: 600 ms lenyomás a cicás képen (körkörös töltődés-jelző) → 6 mancsnyom sétál át, `sound.pop()`, előbukkan a titkos polaroid a felirattal
+- [x] Step 3: `quiz`: homályos kép (`filter: blur(14px)`) + lakat; 3 gomb; rossz → rázás + tipp, jó → lakat lepattan, blur 0, `sound.chime()`
+- [x] Step 4: `scatter`: kupac; koppintásra/húzásra a polaroidok előre számolt helyekre repülnek (GSAP), újra koppintva visszarendeződnek
+- [x] Step 5: ellenőrzés böngészőben mind a négyre, képernyőképpel
+- [x] Step 6: commit
 
 ### Task 8: Finálé
 
 **Files:** Create `js/finale.js`; Modify `js/main.js`, `css/style.css`
 
-- [ ] Step 1: levél: bekezdésenként és soronként beúszó Caveat szöveg görgetésre; ha `letter.placeholder`, szaggatott keretes, jól látható helykitöltő
-- [ ] Step 2: gyertya: CSS-gyertya animált lánggal; „Fújd el a gyertyát” gomb → `getUserMedia({audio:true})`, `AnalyserNode` RMS > 0,18 legalább 250 ms-ig → kialszik (füst-animáció); hiba/elutasítás esetén azonnal, egyébként 4 s után „vagy koppints rá” és a lángra koppintás is elfújja; a mikrofonfolyam leállítása
-- [ ] Step 3: kialváskor papírfecni-konfetti (DOM, 60 db, GSAP) és „folytatás következik…” utolsó lap
-- [ ] Step 4: ellenőrzés: koppintásos ág böngészőben; mikrofonos ág a telefonos teszten
-- [ ] Step 5: commit
+- [x] Step 1: levél: bekezdésenként és soronként beúszó Caveat szöveg görgetésre; ha `letter.placeholder`, szaggatott keretes, jól látható helykitöltő
+- [x] Step 2: gyertya: CSS-gyertya animált lánggal; „Fújd el a gyertyát” gomb → `getUserMedia({audio:true})`, `AnalyserNode` RMS > 0,18 legalább 250 ms-ig → kialszik (füst-animáció); hiba/elutasítás esetén azonnal, egyébként 4 s után „vagy koppints rá” és a lángra koppintás is elfújja; a mikrofonfolyam leállítása
+- [x] Step 3: kialváskor papírfecni-konfetti (DOM, 60 db, GSAP) és „folytatás következik…” utolsó lap
+- [x] Step 4: ellenőrzés: koppintásos ág böngészőben; mikrofonos ág a telefonos teszten
+- [x] Step 5: commit
 
 ### Task 9: Teljes végigjátszás és takarítás
 
-- [ ] Step 1: `npm test` → PASS
-- [ ] Step 2: 390×844 nézetben végiggörgetés elejétől a végéig, minden interakció kipróbálva, képernyőképek, `read_console_messages` hibamentes
-- [ ] Step 3: reduced-motion és asztali szélesség gyors ellenőrzése
-- [ ] Step 4: régi, már nem használt kód/fájl nem maradhat; commit
+- [x] Step 1: `npm test` → PASS
+- [x] Step 2: 390×844 nézetben végiggörgetés elejétől a végéig, minden interakció kipróbálva, képernyőképek, `read_console_messages` hibamentes
+- [x] Step 3: reduced-motion és asztali szélesség gyors ellenőrzése
+- [x] Step 4: régi, már nem használt kód/fájl nem maradhat; commit
