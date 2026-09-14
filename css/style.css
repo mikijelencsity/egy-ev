@@ -187,7 +187,6 @@ button{font:inherit;color:inherit}
 }
 .letter p{font-size:27px;line-height:34px;margin-bottom:34px}
 .letter .signature{font-size:36px;color:var(--accent);text-align:right;margin:0}
-.letter.is-placeholder p:not(.signature){color:var(--accent);border:2px dashed var(--accent);padding:0 8px;border-radius:6px}
 
 .candle-wrap{text-align:center;margin-top:90px}
 .candle-title{font-size:40px;color:var(--ink)}

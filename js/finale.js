@@ -6,9 +6,13 @@ export function mountFinale(el, { letter, sound, reduce }) {
 
   // --- Levél ---
   const letterEl = el.querySelector('#letter');
-  letterEl.classList.toggle('is-placeholder', !!letter.placeholder);
-  letterEl.innerHTML = letter.paragraphs.map(p => `<p class="hand">${esc(p)}</p>`).join('')
-    + `<p class="signature hand">${esc(letter.signature)}</p>`;
+  if (letter.placeholder) {
+    letterEl.hidden = true;
+    el.querySelector('#letter-head').hidden = true;
+  } else {
+    letterEl.innerHTML = letter.paragraphs.map(p => `<p class="hand">${esc(p)}</p>`).join('')
+      + `<p class="signature hand">${esc(letter.signature)}</p>`;
+  }
   letterEl.querySelectorAll('p').forEach(p => {
     gsap.fromTo(p, { clipPath: 'inset(0 100% 0 0)' }, {
       clipPath: 'inset(0 0% 0 0)', duration: reduce ? 0.01 : 1.8, ease: 'power1.inOut',
@@ -62,7 +66,7 @@ export function mountFinale(el, { letter, sound, reduce }) {
       raf = requestAnimationFrame(loop);
     } catch {
       clearTimeout(fallbackTimer);
-      say('koppints a lángra, és elfújod');
+      say('koppints a lángra');
     }
   }
 

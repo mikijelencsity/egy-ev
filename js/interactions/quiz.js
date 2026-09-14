@@ -33,13 +33,13 @@ export function mount(el, { sound }) {
       gsap.to(lock, { y: -90, rotation: 35, opacity: 0, duration: 0.8, ease: 'power2.in' });
       fig.classList.add('unlocked');
       fig.classList.remove('locked');
-      hintEl.textContent = 'feloldva ♡';
+      hintEl.textContent = 'feloldva';
       el.closest('.chapter').classList.add('solved');
     } else {
       btn.classList.add('wrong');
       navigator.vibrate?.(60);
       gsap.fromTo(card, { x: -12 }, { x: 0, duration: 0.6, ease: 'elastic.out(1.2, 0.3)' });
-      hintEl.textContent = `nem egészen... tipp: ${quiz.hint}`;
+      hintEl.textContent = `nem ez. tipp: ${quiz.hint}`;
     }
   });
 }
