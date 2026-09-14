@@ -5,7 +5,7 @@
 
 export const START_DATE = new Date(2025, 8, 14, 0, 0, 0); // 2025. szeptember 14.
 
-export const NAMES = 'Jazmin & Miki';
+export const NAMES = 'Jázmin & Miki';
 
 const img = name => `images/web/${name}`;
 

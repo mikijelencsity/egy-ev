@@ -4,7 +4,7 @@ Dátum: 2026-09-14 · Állapot: jóváhagyva (brainstorming)
 
 ## Cél
 
-Egy év közös emlékeiről szóló, telefonra készült oldal (Jazmin & Miki, 2025-09-14 óta együtt). Jazmin egyedül nyitja meg a telefonján, QR-kódról; Miki mellette ül. Legyen látványos és emlékezetes, ne csak kattintgatós: görgetésre mozgó „film”, közben olyan pontokkal, ahol ő maga csinál valamit.
+Egy év közös emlékeiről szóló, telefonra készült oldal (Jázmin & Miki, 2025-09-14 óta együtt). Jázmin egyedül nyitja meg a telefonján, QR-kódról; Miki mellette ül. Legyen látványos és emlékezetes, ne csak kattintgatós: görgetésre mozgó „film”, közben olyan pontokkal, ahol ő maga csinál valamit.
 
 A jelenlegi `index.html` (kinyitható kártyás idővonal) teljesen lecserélődik. Az eredeti a `Downloads\evfordulo-oldal.zip`-ben megmarad.
 
@@ -22,7 +22,7 @@ A jelenlegi `index.html` (kinyitható kártyás idővonal) teljesen lecserélőd
 ## Élményfolyam
 
 ### 0. Borító
-Bőrkötéses napló, rajta „1 év” és „Jazmin & Miki” kézírással. Jazmin felfelé húzással vagy koppintással kinyitja: 3D lapfordulás, papírhang. Ez az első felhasználói gesztus, ezért itt indul el a hangmotor. A borító kinyitásáig az oldal nem görgethető.
+Bőrkötéses napló, rajta „1 év” és „Jázmin & Miki” kézírással. Jázmin felfelé húzással vagy koppintással kinyitja: 3D lapfordulás, papírhang. Ez az első felhasználói gesztus, ezért itt indul el a hangmotor. A borító kinyitásáig az oldal nem görgethető.
 
 ### 1. Számláló
 Kézírással kiíródik: „Ma pontosan … napja vagyunk együtt”, a szám felpörög a valós értékig. Kezdő időpont: 2025-09-14 00:00 helyi idő. Alatta kisebb sorban óra : perc : másodperc, élőben ketyegve.
